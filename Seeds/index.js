@@ -11,19 +11,21 @@ db.once('open', () => {
     console.log('Database connected');
 });
 
+const sample = array => array[Math.floor(Math.random()*array.length)];
 
 const seedDB = async () => {
     await Campground.deleteMany({});
-    for (let i = 0; i < 20; i++) {
-        const placeSeed = Math.floor(Math.random() * places.length);
-        const descriptorsSeed = Math.floor(Math.random() * descriptors.length)
-        const citySeed = Math.floor(Math.random() * cities.length)
+    for (let i = 0; i < 300; i++) {
+        const random1000 = Math.floor(Math.random()*1000);
+        /* const placeSeed = Math.floor(Math.random() * places.length); */
+        /* const descriptorsSeed = Math.floor(Math.random() * descriptors.length) */
+        /* const citySeed = Math.floor(Math.random() * cities.length) */
         const price = Math.floor(Math.random() * 20) + 10;
         const camp = new Campground({
             //your user id
             author: '66508dcf7722fdd919a18d4e',
-            location: `${cities[citySeed].city}, ${cities[citySeed].state}`,
-            title: `${descriptors[descriptorsSeed]} ${places[placeSeed]}`,
+            location: `${cities[random1000].city}, ${cities[random1000].state}`,
+            title: `${sample(descriptors)} ${sample(places)}`,
             images: [
                 {
                     url: 'https://res-console.cloudinary.com/doluxrdqp/media_explorer_thumbnails/011a4ca3a3bd2f2473969adf7109042e/detailed',
@@ -35,7 +37,10 @@ const seedDB = async () => {
             price,
             geometry: { 
                 type: 'Point',
-                coordinates: [-9.144851, 38.715424] }
+                coordinates: [
+                    cities[random1000].longitude,
+                    cities[random1000].latitude
+                ] }
         })
         await camp.save();
     }
