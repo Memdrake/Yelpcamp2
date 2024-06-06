@@ -3,6 +3,7 @@ if (process.env.NODE_ENV !== "production") {
     require("dotenv").config();
 }
 
+
 const helmet = require('helmet');
 const express = require('express');
 const path = require('path');
@@ -24,10 +25,13 @@ const reviewsRoutes = require('./routes/reviews');
 const campgroundRoutes = require('./routes/campgrounds');
 //VVVV used to avoid mongo injection
 const mongoSanitize = require('express-mongo-sanitize');
+const dbUrl = 'mongodb://localhost:27017/yelp-camp';
+const MongoStore = require('connect-mongo');
 
+//mongodb://localhost:27017/yelp-camp
 //VVVV connects us with our database
 //     in case of error displays connection error and the error, in case of success, it connects with the db and display database connected
-mongoose.connect('mongodb://localhost:27017/yelp-camp');
+mongoose.connect(dbUrl);
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Connection Error:'));
 db.once('open', () => {
@@ -94,9 +98,20 @@ app.use(
     })
 );
 
+const store = MongoStore.create({
+    mongoUrl: dbUrl,
+    touchAfter: 24 * 60 * 60,
+    crypto: {
+        secret: 'thisshouldbeabettersecret!'
+    }
+});
+store.on("error", function(e) {
+    console.log("session store error", e)
+})
 //VVVV builds up our session and cookies
 const sessionConfig = {
     //VVV this is the cookie name we are looking for
+    store,
     name: 'njnasdfn',
     secret: 'thisshouldbeabettersecret!',
     resave: false,
