@@ -25,7 +25,7 @@ const reviewsRoutes = require('./routes/reviews');
 const campgroundRoutes = require('./routes/campgrounds');
 //VVVV used to avoid mongo injection
 const mongoSanitize = require('express-mongo-sanitize');
-const dbUrl = 'mongodb://localhost:27017/yelp-camp';
+const dbUrl = process.env.DB_URL;
 const MongoStore = require('connect-mongo');
 
 //mongodb://localhost:27017/yelp-camp
