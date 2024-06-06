@@ -49,7 +49,7 @@ app.use(mongoSanitize());
 //VVVV protects our headers
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'Public')));
 app.use(helmet({contentSecurityPolicy: false,
     crossOriginEmbedderPolicy: true
 }));
