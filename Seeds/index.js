@@ -28,7 +28,7 @@ const seedDB = async () => {
             title: `${sample(descriptors)} ${sample(places)}`,
             images: [
                 {
-                    url: 'https://res-console.cloudinary.com/doluxrdqp/media_explorer_thumbnails/011a4ca3a3bd2f2473969adf7109042e/detailed',
+                    url: 'https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?q=80&w=3870&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
                     filename: 'YelpCamp/w1khzee9jyoeonte06ri',
                 }
             ],
