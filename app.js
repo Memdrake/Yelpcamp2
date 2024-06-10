@@ -111,7 +111,7 @@ store.on("error", function(e) {
 })
 //VVVV builds up our session and cookies
 const sessionConfig = {
-    //VVV this is the cookie name we are looking for
+    //VVVV this is the cookie name we are looking for
     store,
     name: 'njnasdfn',
     secret: 'thisshouldbeabettersecret!',
