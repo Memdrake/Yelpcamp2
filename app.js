@@ -106,6 +106,7 @@ const store = MongoStore.create({
         secret: 'thisshouldbeabettersecret!'
     }
 });
+
 store.on("error", function(e) {
     console.log("session store error", e)
 })
